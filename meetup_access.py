@@ -2,20 +2,26 @@ import meetup.api
 import time
 
 #Appel du client de l'API
+#to get the key login and go to the following url :
+#https://secure.meetup.com/fr-FR/meetup_api/key/
  
-client = meetup.api.Client('your_API_number', overlimit_wait=False)
-
+def mc() : 
+    client = meetup.api.Client('your_api_key_here', overlimit_wait=True)
+    x = client.GetMembers({'group_urlname' :'cultiver-autrement-des-legumes-a-paris'})
+    return x
+    
 rl = meetup.api.RateLimit
 
 
 print rl.limit
 print rl.remaining
+print rl.reset
 
-x = client.GetMembers({'group_urlname' :'cultiver-autrement-des-legumes-a-paris'})
+
 
 #ensemble des donnees sur les utilisateurs du groupe meetup.
 
-def mudb(x=x, num = 0) :
+def mudb(x=mc(), num = 0) :
 	# print 'num', num
 	num, mulist = 0, []
 	for i in x.results :
@@ -31,7 +37,7 @@ def mudb(x=x, num = 0) :
 #liste du l'ensemble des villes ou habites les membres
 #du groupe meetup.
 
-def b(x=x) :
+def b(x=mc()) :
 	vl = []
 	for i in x.results :
 		if i['city'].encode('UTF-8') not in vl :
@@ -43,7 +49,7 @@ def b(x=x) :
 #liste de nom de l'ensemble des sujets auxquelles l'utilisateur 
 #s'est inscrit.
 
-def c(x=x):
+def c(x=mc()):
 
 	num, topics_l = 0, []
 	for i in x.results :
@@ -57,7 +63,7 @@ def c(x=x):
 
 #liste de l'ensemble des "topics" par utilisateur du groupe meetup.
 
-def d(x=x) :
+def d(x=mc()) :
 
 	topics_l = c()
 	unique_topics_list = []
@@ -97,6 +103,8 @@ def mulist() :
 
 if __name__ == "__main__" : 
     
-    l = mulist()
-    print l
+#    l = mulist()
+#    print l
+    pass
+
 
