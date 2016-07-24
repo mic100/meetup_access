@@ -98,13 +98,20 @@ def mulist() :
                     pass 
     return mulist
 
-#for i in mulist() :
-#    print i['topics_list'], '\n'
+#frequence d'utilisateurs du groupe meetup par 'topics'.
+
+def topics_freq() :
+    m = []
+    for i in mulist() :
+        m = m + i['topics_list']
+    temp = set(m)
+    res = {}
+    for i in temp :
+        res[i] = m.count(i)
+    return res 
+    
 
 if __name__ == "__main__" : 
     
-#    l = mulist()
-#    print l
+    print topics_freq()
     pass
-
-
