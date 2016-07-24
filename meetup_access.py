@@ -109,9 +109,23 @@ def topics_freq() :
     for i in temp :
         res[i] = m.count(i)
     return res 
+
+#les 'topics' ayant un seuil de plus de 20 membres 
+#du groupe meetup en commun.
+#20 membres est la valeur par defaut du filtre de
+#reponse.
+
+def thresold(t=20) :
     
+    for i in topics_freq() :
+        z = topics_freq()[i]
+        if z >= t :
+            print i, topics_freq()[i]
+        else :
+            pass
+            
 
 if __name__ == "__main__" : 
     
-    print topics_freq()
-    pass
+    print thresold(t=40)
+
