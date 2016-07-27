@@ -101,6 +101,7 @@ def mulist() :
 #frequence d'utilisateurs du groupe meetup par 'topics'.
 
 def topics_freq() :
+    
     m = []
     for i in mulist() :
         m = m + i['topics_list']
@@ -123,9 +124,30 @@ def thresold(t=20) :
             print i, topics_freq()[i]
         else :
             pass
+
+# sauver les donnees dans un fichier .json ou .txt.
+
+def save_to_file(mydir, myfile, mydata) :
+    
+    location = mydir
+    f = open(location + myfile, 'w')
+    if '.json' in myfile :
+        f.write(json.dumps(mydata, f))
+    else : 
+        f.write(str(mydata))
+    f.close()
+
+def get_mu_name() :
+    
+    nl = []
+    for i in mulist() :
+        name = i['name'].lower().strip()#.replace('\xc3\xa', 'e')
+        nl.append(name)
+    return nl
             
 
 if __name__ == "__main__" : 
     
+    #par exemple :
     print thresold(t=40)
 
